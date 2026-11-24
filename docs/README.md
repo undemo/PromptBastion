@@ -92,6 +92,9 @@ python vllm_server.py
 ```
 
 4. **启动后端服务**
+
+在部署环境中设置 `DATA_PURIFICATION_API_KEY` 后，运行以下任一命令。
+
 ```bash
 # 开发模式
 python main.py
@@ -129,9 +132,15 @@ class Config:
     
     # 数据净化API配置
     DATA_PURIFICATION_MODEL = "gemini-2.5-flash"
-    DATA_PURIFICATION_API_KEY = "your-api-key"
     DATA_PURIFICATION_API_URL = "https://api.yourapi.cn/v1/chat/completions"
 ```
+
+### 数据净化 API 密钥
+
+- `DATA_PURIFICATION_API_KEY`（必填）用于数据净化和门卫裁判。未设置或为空时，后端服务无法启动。
+- `DATA_PURIFICATION_API_BAK_KEY`（可选）用于备用配置。未设置或为空时，沿用主用密钥。
+
+请通过部署平台的密钥管理功能注入环境变量。
 
 ### vLLM 服务配置 (`vllm_server.py`)
 
