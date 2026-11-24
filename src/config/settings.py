@@ -47,11 +47,15 @@ class Config:
     
     # 数据净化模块配置
     DATA_PURIFICATION_MODEL = "gemini-2.5-flash"
-    DATA_PURIFICATION_API_KEY = "sk-ZCEGdVT9d5of3tXL1Oys6dhlUnQJdJqbvCPhk3qTNHWNn62Z"
+    DATA_PURIFICATION_API_KEY = os.getenv("DATA_PURIFICATION_API_KEY", "").strip()
+    if not DATA_PURIFICATION_API_KEY:
+        raise RuntimeError("请设置环境变量 DATA_PURIFICATION_API_KEY")
     DATA_PURIFICATION_API_URL = "https://api.yourapi.cn/v1/chat/completions"
     DATA_PURIFICATION_BAK_MODEL = "gemini-2.5-pro"
     DATA_PURIFICATION_API_BAK_URL = "https://api.yourapi.cn/v1/chat/completions"
-    DATA_PURIFICATION_API_BAK_KEY = "sk-ZCEGdVT9d5of3tXL1Oys6dhlUnQJdJqbvCPhk3qTNHWNn62Z"
+    DATA_PURIFICATION_API_BAK_KEY = (
+        os.getenv("DATA_PURIFICATION_API_BAK_KEY", "").strip() or DATA_PURIFICATION_API_KEY
+    )
     DATA_PURIFICATION_TIMEOUT = 15
     
     # 超时配置
